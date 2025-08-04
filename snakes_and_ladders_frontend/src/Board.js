@@ -16,7 +16,6 @@ import React from "react";
  */
 const BOARD_SIZE = 10; // 10x10
 const CELL_COUNT = 100;
-const BOARD_IMAGE = "/snakes_and_ladders_board.jpg";
 
 // Convert 1-100 to [row, col] (0-based, boustrophedon order)
 function squareToGridPos(n) {
@@ -100,33 +99,9 @@ const Board = ({
   return (
     <div
       className="game-board-outer"
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        minHeight: "80vh",
-        width: "100%",
-        background: "#282c34",
-        position: "relative",
-        overflowX: "auto",
-      }}
     >
       <div
         className="game-board"
-        style={{
-          position: "relative",
-          width: `min(98vw, ${maxBoardPx}px)`,
-          maxWidth: maxBoardPx,
-          aspectRatio: "1",
-          backgroundImage: `url('${BOARD_IMAGE}')`,
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          border: "8px solid #ffe14c",
-          boxShadow: "0 6px 32px #2227",
-          margin: "0 auto",
-          transition: "width 0.2s",
-        }}
       >
         {/* Player tokens overlay */}
         <div

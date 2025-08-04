@@ -84,13 +84,32 @@
   transform: translateY(0);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* BOARD LAYOUT STYLES */
+.game-board-outer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  width: 100%;
+  background: transparent; /* do not hide board image */
+  position: relative;
+  overflow-x: auto;
+}
+
+.game-board {
+  position: relative;
+  width: min(98vw, 560px);
+  max-width: 560px;
+  aspect-ratio: 1;
+  /* Use absolute root for CRA/public assets */
+  background-image: url("/snakes_and_ladders_board.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 8px solid #ffe14c;
+  box-shadow: 0 6px 32px #2227;
+  margin: 0 auto;
+  transition: width 0.2s;
 }
 
 /* Responsive design for mobile */
