@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import boardImg from "./assets/snakes_and_ladders_board.jpg";
 
 /**
@@ -94,21 +94,89 @@ const Board = ({
     tokenMap[pos].push(p);
   });
 
-  // Responsive board size
-  const maxBoardPx = 560;
+  // Diagnostic: check that the imported image is a string, and log its content.
+  useEffect(() => {
+    // eslint-disable-next-line
+    if (!boardImg) {
+      // This should never trigger unless the import failed (e.g., missing file in build)
+      // eslint-disable-next-line
+      console.error(
+        "Board background image failed to import. 'boardImg':",
+        boardImg
+      );
+    } else if (typeof boardImg !== "string" || !boardImg.match(/\.(jpg|jpeg|png|svg|webp)\b/i)) {
+      // If the 'boardImg' is not a reasonable asset path
+      // eslint-disable-next-line
+      console.error(
+        "Board image asset path appears to be invalid.",
+        boardImg
+      );
+    } else {
+      // Additionally, attempt preloading for more diagnostics
+      const img = new window.Image();
+      img.onload = () => {
+        // eslint-disable-next-line
+        // console.log("Board background image loaded successfully:", boardImg);
+      };
+      img.onerror = () => {
+        // eslint-disable-next-line
+        console.error(
+          "Failed to load board background image (network or file error).",
+          boardImg
+        );
+      };
+      img.src = boardImg;
+    }
+  }, []);
+
+  // For further diagnosis, we will add a unique test id to the board:
+  const boardDivRef = useRef();
+
+  // Detect if background image style is actually applied (run on first mount)
+  useEffect(() => {
+    if (boardDivRef.current) {
+      // Check computed background-image
+      const style = window.getComputedStyle(boardDivRef.current);
+      const bg = style.getPropertyValue("background-image");
+      if (!bg || bg === "none") {
+        // eslint-disable-next-line
+        console.error(
+          "No background-image computed style is set on .game-board!",
+          boardDivRef.current,
+          boardDivRef.current.style.backgroundImage
+        );
+      } else if (bg && !(bg.includes(".jpg") || bg.includes("snakes_and_ladders_board"))) {
+        // eslint-disable-next-line
+        console.error(
+          "Background-image is set, but doesn't look like the correct board image:",
+          bg
+        );
+      }
+    }
+  }, []);
 
   return (
-    <div
-      className="game-board-outer"
-    >
+    <div className="game-board-outer">
       <div
+        ref={boardDivRef}
         className="game-board"
         style={{
+          minHeight: 320, // minimum to always make board visible
+          minWidth: 320,
+          width: "min(98vw, 560px)",
+          maxWidth: "560px",
+          aspectRatio: "1/1",
+          position: "relative",
           backgroundImage: `url(${boardImg})`,
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
+          border: "8px solid #ffe14c",
+          boxShadow: "0 6px 32px #2227",
+          margin: "0 auto",
+          transition: "width 0.2s",
         }}
+        data-testid="sl-board"
       >
         {/* Player tokens overlay */}
         <div
