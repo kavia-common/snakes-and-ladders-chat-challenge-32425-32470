@@ -7,27 +7,48 @@ import Chat from "./Chat";
 const BOARD_SIZE = 10;
 const END_CELL = 100;
 
-// These must match the provided design notes for game logic
+/**
+ * Snakes and Ladders positions are now mapped 1:1 to the extracted board mapping in assets/snakes_and_ladders_mapping.md
+ * === Ladders ===
+ * | Start | End |
+ * |-------|-----|
+ * | 4     | 25  |
+ * | 13    | 46  |
+ * | 33    | 49  |
+ * | 42    | 63  |
+ * | 50    | 69  |
+ * | 62    | 81  |
+ * | 74    | 92  |
+ * === Snakes ===
+ * | Start | End |
+ * |-------|-----|
+ * | 27    | 5   |
+ * | 40    | 3   |
+ * | 43    | 18  |
+ * | 54    | 31  |
+ * | 66    | 45  |
+ * | 76    | 58  |
+ * | 89    | 53  |
+ * | 99    | 41  |
+ */
 const SNAKES = [
-  { head: 99, tail: 7 },
-  { head: 92, tail: 35 },
+  { head: 27, tail: 5 },
+  { head: 40, tail: 3 },
+  { head: 43, tail: 18 },
+  { head: 54, tail: 31 },
+  { head: 66, tail: 45 },
+  { head: 76, tail: 58 },
   { head: 89, tail: 53 },
-  { head: 74, tail: 17 },
-  { head: 64, tail: 24 },
-  { head: 62, tail: 19 },
-  { head: 49, tail: 11 },
-  { head: 46, tail: 5 },
-  { head: 16, tail: 6 },
+  { head: 99, tail: 41 }
 ];
 const LADDERS = [
-  { base: 2, top: 23 },
-  { base: 8, top: 34 },
-  { base: 20, top: 77 },
-  { base: 32, top: 68 },
-  { base: 41, top: 79 },
-  { base: 71, top: 91 },
-  { base: 80, top: 100 },
-  { base: 84, top: 98 },
+  { base: 4, top: 25 },
+  { base: 13, top: 46 },
+  { base: 33, top: 49 },
+  { base: 42, top: 63 },
+  { base: 50, top: 69 },
+  { base: 62, top: 81 },
+  { base: 74, top: 92 }
 ];
 
 // Util: returns a new idx if there's a snake or ladder; else returns the same idx
