@@ -1,0 +1,4 @@
+{
+    "command": "npm install",
+    "working_directory": "/home/kavia/workspace/code-generation/snakes-and-ladders-chat-challenge-32425-32470/snakes_and_ladders_frontend"
+}
