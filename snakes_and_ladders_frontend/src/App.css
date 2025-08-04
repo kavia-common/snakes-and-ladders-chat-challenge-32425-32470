@@ -101,8 +101,7 @@
   width: min(98vw, 560px);
   max-width: 560px;
   aspect-ratio: 1;
-  /* Use absolute root for CRA/public assets */
-  background-image: url("/snakes_and_ladders_board.jpg");
+  /* Board background-image now set inline from Board.js */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

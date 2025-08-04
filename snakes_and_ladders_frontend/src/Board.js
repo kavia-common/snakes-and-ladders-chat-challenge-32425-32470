@@ -1,4 +1,5 @@
 import React from "react";
+import boardImg from "./assets/snakes_and_ladders_board.jpg";
 
 /**
  * PUBLIC_INTERFACE
@@ -102,6 +103,12 @@ const Board = ({
     >
       <div
         className="game-board"
+        style={{
+          backgroundImage: `url(${boardImg})`,
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }}
       >
         {/* Player tokens overlay */}
         <div
