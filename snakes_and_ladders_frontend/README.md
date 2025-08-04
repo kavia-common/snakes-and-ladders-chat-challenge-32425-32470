@@ -1,82 +1,47 @@
-# Lightweight React Template for KAVIA
+# Snakes and Ladders Frontend (React)
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+This React app is a playful, modern implementation of the Snakes and Ladders board game with:
 
-## Features
+- A visually-accurate board based on a designer image background
+- Exact position overlay of snakes/ladders per provided design notes
+- A trash-talking AI chat panel powered by OpenAI (see setup below)
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+## Setup
 
-## Getting Started
+### 1. Install dependencies
 
-In the project directory, you can run:
+    npm install
 
-### `npm start`
+### 2. Image assets
 
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The player-facing board uses a photographic background:  
+Public asset: `public/snakes_and_ladders_board.jpg`
 
-### `npm test`
+### 3. Environment variables
 
-Launches the test runner in interactive watch mode.
+To enable chat with the AI (trash talk), you **must** provide your OpenAI API key:
+- Copy `.env.example` to `.env` and fill in your key.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-## Customization
-
-### Colors
-
-The main brand colors are defined as CSS variables in `src/App.css`:
-
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
 ```
+cp .env.example .env
+# Edit .env to set REACT_APP_OPENAI_API_KEY=...
+```
+If no key is provided, the chat panel will show an error and not be functional.
 
-### Components
+### 4. Run
 
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
+    npm start
 
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
+Open http://localhost:3000 to access the game.
 
-## Learn More
+## Implementation Notes
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- The board is rendered with CSS grid and overlays SVG for snakes and ladders based on the extracted design.
+- The chat interface sends messages to OpenAI (gpt-3.5-turbo) with a 'trash talk' system prompt.
+- All styles are in `src/App.css`, the board is in `src/Board.js`, and chat/AI is in `src/Chat.js`.
 
-### Code Splitting
+## Credits
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Board design and placement from assets/snakes_and_ladders_board_design_notes.md
+- Board image: public/snakes_and_ladders_board.jpg
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
