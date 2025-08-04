@@ -105,6 +105,12 @@ function LadderSVG({ base, top, color }) {
 }
 
 // Main board rendering
+/**
+ * PUBLIC_INTERFACE
+ * Board component for Snakes & Ladders game.
+ * Renders the game board as a 10x10 grid, overlays SVG snakes/ladders, and applies the provided
+ * image as a responsive background. All overlays are layered above the real image.
+ */
 const Board = ({ children }) => (
   <div
     className="game-board-outer"
@@ -115,17 +121,25 @@ const Board = ({ children }) => (
       minHeight: "80vh",
       background: "#282c34",
       position: "relative",
+      width: "100%",
+      overflowX: "auto"
     }}
   >
+    {/* BOARD WRAPPER WITH RESPONSIVE BACKGROUND */}
     <div
       className="game-board"
       style={{
         position: "relative",
-        width: BOARD_SIZE * CELL_SIZE_PX,
-        height: BOARD_SIZE * CELL_SIZE_PX,
-        background: `url('/snakes_and_ladders_board.jpg') center/cover no-repeat`,
+        width: "min(98vw, " + (BOARD_SIZE * CELL_SIZE_PX) + "px)",
+        maxWidth: BOARD_SIZE * CELL_SIZE_PX,
+        aspectRatio: "1",
+        backgroundImage: "url('/snakes_and_ladders_board.jpg')",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
         border: "8px solid #ffe14c",
         boxShadow: "0 6px 32px #2227",
+        margin: "0 auto"
       }}
     >
       {/* Board cells */}
@@ -137,7 +151,10 @@ const Board = ({ children }) => (
           width: "100%",
           height: "100%",
           position: "absolute",
-          pointerEvents: "none"
+          top: 0,
+          left: 0,
+          zIndex: 5,
+          pointerEvents: "none",
         }}
       >
         {[...Array(100)].map((_, idx) => {
@@ -158,13 +175,14 @@ const Board = ({ children }) => (
                 position: "relative",
                 fontFamily: '"Comic Sans MS", "Helvetica Neue", Arial, sans-serif',
                 fontWeight: "bold",
-                fontSize: CELL_SIZE_PX * 0.41,
+                fontSize: "clamp(13px, 3vw, " + (CELL_SIZE_PX * 0.41) + "px)",
                 color: "#000",
                 display: "flex",
                 alignItems: "flex-start",
                 justifyContent: "flex-start",
-                padding: CELL_SIZE_PX * 0.08,
-                boxSizing: "border-box"
+                padding: "min(2px, 0.08vw)",
+                boxSizing: "border-box",
+                overflow: "hidden"
               }}
             >
               <span style={{
@@ -172,7 +190,7 @@ const Board = ({ children }) => (
                 position: "absolute",
                 left: 7,
                 top: 0,
-                fontSize: CELL_SIZE_PX * 0.34,
+                fontSize: "clamp(10px, 2vw, " + (CELL_SIZE_PX * 0.34) + "px)",
                 zIndex: 2,
               }}>{num}</span>
             </div>
@@ -180,12 +198,17 @@ const Board = ({ children }) => (
         })}
       </div>
       <svg
-        width={BOARD_SIZE * CELL_SIZE_PX}
-        height={BOARD_SIZE * CELL_SIZE_PX}
+        viewBox={`0 0 ${BOARD_SIZE * CELL_SIZE_PX} ${BOARD_SIZE * CELL_SIZE_PX}`}
+        width="100%"
+        height="100%"
         style={{
-          position: "absolute", left: 0, top: 0, pointerEvents: "none",
+          position: "absolute",
+          left: 0,
+          top: 0,
+          pointerEvents: "none",
           zIndex: 10,
         }}
+        preserveAspectRatio="none"
       >
         {/* snake svg head definition */}
         <defs>

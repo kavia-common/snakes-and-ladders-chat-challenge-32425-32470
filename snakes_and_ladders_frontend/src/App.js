@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import Board from "./Board";
+import Board from "./Board"; // Board component will display the actual board image as background
 import Chat from "./Chat";
 
 /**
